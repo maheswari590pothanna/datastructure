@@ -11,51 +11,31 @@ public class Stack<T> {
         this.size = 0;
     }
 
+    LinkedList<T> linkedList = new LinkedList<>();
+
     public void display() {
-        Node<T> curr = top;
-        while (curr != null) {
-            System.out.println(curr.data);
-            curr = curr.next;
-        }
-        System.out.println();
+        linkedList.printLinkedlist();
     }
-    public void push(T element){
-        Node<T> temp=new Node<>(element);
-        temp.next = top;
-        top = temp;
-        size++;
+
+    public void push(T element) {
+        linkedList.addFirst(element);
     }
+
     public T pop() {
-        if (top == null) {
-            throw new RuntimeException("Stack Underflow: Cannot pop from an empty stack");
-        }
-        T popData = top.data;
-        top = top.next;
-        return popData;
+        return linkedList.removeFirst();
     }
-    public T peek()  {
-        if (top == null) {
-            throw new RuntimeException("Stack Underflow: Cannot peek from an empty stack");
-        }
-        return top.data;
+
+    public T peek() {
+        return linkedList.peekFirst();
     }
+
     public boolean isEmpty() {
-        return top == null;
+        return linkedList.isEmpty();
 
     }
+
     public int size() {
-        return size;
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Stack<Integer> stack=new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        System.out.println(stack.pop());
-        System.out.println(stack.peek());
-        stack.display();
+        return linkedList.size();
     }
 }
 

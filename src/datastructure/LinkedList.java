@@ -1,7 +1,15 @@
 package datastructure;
 
 public class LinkedList<T> {
-    Node<T> head;
+    private Node<T> head;
+    private Node<T> tail;
+    private int size;
+
+    public LinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
 
     public void add(T e) {
         Node<T> temp = new Node<>(e);
@@ -26,24 +34,39 @@ public class LinkedList<T> {
         Node<T> temp = new Node<>(e);
         if (head == null) {
             head = temp;
+            tail = temp;
         } else {
             temp.next = head;
+            head = temp;
         }
-        head = temp;
+        size++;
     }
 
     public void addLast(T data) {
-        Node<T> temp = new Node<>(data);
-        if (head == null) {
-            head = temp;
-            return;
+        Node<T> newNode = new Node<>(data);
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
         }
-        Node<T> curr = head;
-        while (curr.next != null) {
-            curr = curr.next;
-        }
-        curr.next = temp;
+        size++;
     }
+
+    public T peekFirst() {
+        if (head == null) throw new RuntimeException("List is empty");
+        return head.data;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
     public void addAtIndex(int index, T data) {
         if (index < 0) {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
@@ -67,7 +90,7 @@ public class LinkedList<T> {
         current.next = newNode;
     }
 
-    public void printLinkedlist(Node<T> head) {
+    public void printLinkedlist() {
         Node<T> curr = head;
         while (curr != null) {
             System.out.print(curr.data + " ");
@@ -75,16 +98,14 @@ public class LinkedList<T> {
         }
     }
 
-    public void removeFirst() {
-        if (head == null) {
-            head = null;
-        } else if (head.next == null) {
-            head = null;
-        } else if (head.next != null) {
-            Node<T> curr = head;
-            head = head.next;
-            curr.next = null;
-        }
+    public T removeFirst() {
+        if (head == null) throw new RuntimeException("List is empty");
+        T val = head.data;
+        head = head.next;
+        if (head == null)
+            tail = null;
+        size--;
+        return val;
     }
 
     public void removeLast() {
