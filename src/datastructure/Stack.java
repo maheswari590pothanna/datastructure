@@ -9,8 +9,8 @@ public class Stack<T> {
     public Stack() {
         this.top = null;
         this.size = 0;
-    }
 
+    }
     LinkedList<T> linkedList = new LinkedList<>();
 
     public void display() {
@@ -18,7 +18,7 @@ public class Stack<T> {
     }
 
     public void push(T element) {
-        linkedList.addFirst(element);
+        linkedList.addLast(element);
     }
 
     public T pop() {
