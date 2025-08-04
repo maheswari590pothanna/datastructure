@@ -1,9 +1,7 @@
 package datastructure;
-
-public class Graph {
-
+class Graph {
     int vertices;
-    Node[] adjList;
+    Node[] adjList; // array of linked list nodes
     Graph(int v) {
         vertices = v;
         adjList = new Node[vertices];
@@ -11,7 +9,6 @@ public class Graph {
             adjList[i] = null;
         }
     }
-
     void addEdge(int src, int dest) {
         Node newNode = new Node(dest);
         newNode.next = adjList[src];
@@ -31,20 +28,22 @@ public class Graph {
             this.next = null;
         }
     }
-
-    // DFS traversal
     void dfs(int start) {
         boolean[] visited = new boolean[vertices];
         int[] stack = new int[vertices];
         int top = -1;
+
         stack[++top] = start;
+
         System.out.print("DFS: ");
         while (top != -1) {
             int current = stack[top--];
+
             if (!visited[current]) {
                 System.out.print(current + " ");
                 visited[current] = true;
             }
+
             Node temp = adjList[current];
             while (temp != null) {
                 if (!visited[temp.data]) {
@@ -91,21 +90,18 @@ public class Graph {
             System.out.println();
         }
     }
+        public static void main(String[] args) {
+            Graph g = new Graph(7); // 0 to 6
 
-    public static void main(String[] args) {
-        Graph g = new Graph(7);
+            g.addEdge(0, 1);
+            g.addEdge(0, 2);
+            g.addEdge(1, 3);
+            g.addEdge(1, 4);
+            g.addEdge(2, 5);
+            g.addEdge(2, 6);
 
-        g.addEdge(0, 1);
-        g.addEdge(0, 2);
-        g.addEdge(1, 3);
-        g.addEdge(1, 4);
-        g.addEdge(2, 5);
-        g.addEdge(2, 6);
-
-        g.printGraph();
-        g.dfs(0);
-        g.bfs(0);
+            g.printGraph();
+            g.dfs(0); // DFS traversal
+            g.bfs(0);
+        }
     }
-
-}
-
