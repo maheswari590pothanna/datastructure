@@ -91,8 +91,7 @@ class Graph {
         }
     }
         public static void main(String[] args) {
-            Graph g = new Graph(7); // 0 to 6
-
+            Graph g = new Graph(7);
             g.addEdge(0, 1);
             g.addEdge(0, 2);
             g.addEdge(1, 3);
@@ -101,7 +100,7 @@ class Graph {
             g.addEdge(2, 6);
 
             g.printGraph();
-            g.dfs(0); // DFS traversal
+            g.dfs(0);
             g.bfs(0);
         }
     }
