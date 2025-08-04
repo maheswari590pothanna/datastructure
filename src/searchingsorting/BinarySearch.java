@@ -15,7 +15,7 @@ public class BinarySearch {
                 right=mid-1;
             }
             else if(ar[mid]<target){
-
+                left=mid+1;
             }
         }
         return -1;
